@@ -12,7 +12,7 @@ in
   };
   config = mkIf cfg.enable {
     environment.systemPackages = [
-      pkgs.netmaker-netclient
+      pkgs.netclient
     ];
 
     networking.wireguard.enable = true;
@@ -24,7 +24,7 @@ in
       documentation = [ "https://docs.netmaker.org https://k8s.netmaker.org" ];
       serviceConfig = {
         Type = "simple";
-        ExecStart = "${pkgs.netmaker-netclient}/bin/netclient daemon";
+        ExecStart = "${pkgs.netclient}/bin/netclient daemon";
         RestartSec = "15s";
       };
       wantedBy = [ "multi-user.target" ];
