@@ -8,7 +8,7 @@
 
   outputs = { self, nixpkgs, flake-utils }: {
     nixosModules = {
-      netclient = import ./packages/netclient.nix;
+      netclient = import ./modules/netclient.nix;
     };
   } // (flake-utils.lib.eachDefaultSystem (system:
     let
