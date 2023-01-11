@@ -13,11 +13,11 @@
   } // (flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
-      netclient = pkgs.callPackage ./packages/netclient.nix { };
     in
     {
       packages = {
-        inherit netclient;
+        netclient = pkgs.callPackage ./packages/netclient.nix { };
+        nushell = pkgs.callPackage ./packages/nushell { };
       };
     }));
 }
