@@ -1,10 +1,10 @@
 name: "Build"
 
 on:
-  # Build on push to master
-  push:
-    branches:
-      - master
+  # Do not build on push to master
+  # push:
+  #   branches:
+  #     - master
 
   # Build on internal pull requests
   pull_request:
@@ -15,19 +15,17 @@ on:
   # Also run regularly because pushes initiated by GitHub Actions don't
   # trigger the above events.
   schedule:
-    # every day at 8am UTC
-    - cron: '10 8 * * *'
+    # every day at 8:10 UTC
+    - cron: "10 8 * * *"
 
 jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v3.1.0
-    - uses: cachix/install-nix-action@v18
-    - uses: cachix/cachix-action@v12
-      with:
-        name: foldu
-        authToken: '${{ secrets.CACHIX_AUTH_TOKEN }}'
-    - run: nix build .#nushell
-
-
+      - uses: actions/checkout@v3.1.0
+      - uses: cachix/install-nix-action@v18
+      - uses: cachix/cachix-action@v12
+        with:
+          name: foldu
+          authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
+      - run: nix build .#nushell
