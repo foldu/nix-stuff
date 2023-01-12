@@ -13,12 +13,12 @@
   } // (flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
+      nuScript = import ./packages/nu-script.nix { inherit pkgs; lib = nixpkgs.lib; };
     in
     {
-      lib = import ./lib/nu-script.nix { inherit pkgs; lib = nixpkgs.lib; };
       packages = {
         netclient = pkgs.callPackage ./packages/netclient.nix { };
         nushell = pkgs.callPackage ./packages/nushell { };
-      };
+      } // nuScript;
     }));
 }
