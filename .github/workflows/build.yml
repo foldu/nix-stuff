@@ -6,11 +6,11 @@ on:
   #   branches:
   #     - master
 
-  # Build on internal pull requests
-  pull_request:
+  # Do not build on internal pull requests
+  # pull_request:
 
-  # Allow to trigger for external PRs
-  workflow_dispatch:
+  # Do not allow to trigger for external PRs
+  # workflow_dispatch:
 
   # Also run regularly because pushes initiated by GitHub Actions don't
   # trigger the above events.
