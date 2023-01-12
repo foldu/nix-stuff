@@ -15,6 +15,7 @@
       pkgs = nixpkgs.legacyPackages.${system};
     in
     {
+      lib = import ./lib/nu-script.nix { inherit pkgs; lib = nixpkgs.lib; };
       packages = {
         netclient = pkgs.callPackage ./packages/netclient.nix { };
         nushell = pkgs.callPackage ./packages/nushell { };
