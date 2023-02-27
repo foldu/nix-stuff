@@ -30,10 +30,7 @@ rustPlatform.buildRustPackage rec {
     sha256 = "sha256-dGsnbKsg0nQFFXZDRDei2uGhGWEQSeSHGpXJp+8QUC8=";
   };
 
-  cargoSha256 = "";
-
-  # enable pkg-config feature of zstd
-  cargoPatches = [ ./zstd-pkg-config.patch ];
+  cargoSha256 = "sha256-9oXMojQA4tSoIxY1lwMPGhQz3WHcxEKtwl+4LsAYbDo=";
 
   nativeBuildInputs = [ pkg-config ]
     ++ lib.optionals (withExtraFeatures && stdenv.isLinux) [ python3 ];
