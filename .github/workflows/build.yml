@@ -1,6 +1,7 @@
 name: "Build"
 
 on:
+  workflow_dispatch:
   # Do not build on push to master
   # push:
   #   branches:
