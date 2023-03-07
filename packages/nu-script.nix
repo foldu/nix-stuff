@@ -12,7 +12,7 @@ let
     in
     fun name ''
       #!${pkgs.nushell}/bin/nu
-      let-env PATH = ($env.PATH | append (`${binPath}` | split row ":"))
+      let-env PATH = ($env.PATH | append ('${binPath}' | split row ":"))
       ${content}
     '';
 in
