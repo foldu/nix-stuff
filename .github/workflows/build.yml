@@ -29,5 +29,7 @@ jobs:
         with:
           name: foldu
           authToken: "${{ secrets.CACHIX_AUTH_TOKEN }}"
-          pathsToPush: result
-      - run: nix build .#nushell
+          pathsToPush: "result-eunzip result-blocklistdownloadthing"
+      - run: |
+          nix build .#blocklistdownloadthing -o result-blocklistdownloadthing
+          nix build .#eunzip -o result-eunzip
