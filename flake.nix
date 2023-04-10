@@ -7,9 +7,7 @@
   };
 
   outputs = { self, nixpkgs, flake-utils }: {
-    nixosModules = {
-      netclient = import ./modules/netclient.nix;
-    };
+    nixosModules = { };
   } // (flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -17,7 +15,6 @@
     in
     {
       packages = {
-        netclient = pkgs.callPackage ./packages/netclient.nix { };
         nushell = pkgs.callPackage ./packages/nushell { };
       } // nuScript;
     }));
