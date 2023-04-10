@@ -14,8 +14,6 @@
       nuScript = import ./packages/nu-script.nix { inherit pkgs; lib = nixpkgs.lib; };
     in
     {
-      packages = {
-        nushell = pkgs.callPackage ./packages/nushell { };
-      } // nuScript;
+      packages = { } // nuScript;
     }));
 }
