@@ -34,5 +34,8 @@
     in
     {
       packages = { } // myPackages // nuScript;
+      nixosModules = {
+        podman-pods = import ./modules/podman-pods.nix;
+      };
     }));
 }
