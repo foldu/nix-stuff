@@ -21,8 +21,10 @@
     };
   };
 
-  outputs = { self, nixpkgs, flake-utils, eunzip, blocklistdownloadthing, ... }: {
-    nixosModules = { };
+  outputs = { nixpkgs, flake-utils, eunzip, blocklistdownloadthing, ... }: {
+    nixosModules = {
+      podman-pods = import ./modules/podman-pods.nix;
+    };
   } // (flake-utils.lib.eachDefaultSystem (system:
     let
       pkgs = nixpkgs.legacyPackages.${system};
@@ -34,8 +36,5 @@
     in
     {
       packages = { } // myPackages // nuScript;
-      nixosModules = {
-        podman-pods = import ./modules/podman-pods.nix;
-      };
     }));
 }
