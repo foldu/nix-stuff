@@ -29,7 +29,7 @@ let
   };
   podOptions.options = {
     ip = lib.mkOption {
-      type = lib.types.str;
+      type = lib.types.nullOr lib.types.str;
       default = null;
       description = lib.mdDoc "Ip of pod";
       example = "10.10.8.3";
