@@ -89,7 +89,7 @@ in
           in
           {
             serviceConfig.Type = "oneshot";
-            wantedBy = map (name: "podman-${podName}-${name}.service") (lib.attrNames options.containers);
+            requiredBy = map (name: "podman-${podName}-${name}.service") (lib.attrNames options.containers);
             preStart = ''
               ${podman} pod rm --force ${podName} || true
             '';
