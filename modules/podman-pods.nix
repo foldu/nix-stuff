@@ -86,10 +86,12 @@ in
         value =
           let
             podman = "${config.virtualisation.podman.package}/bin/podman";
+            childContainerServices = map (name: "podman-${podName}-${name}.service") (lib.attrNames options.containers);
           in
           {
             serviceConfig.Type = "oneshot";
-            requiredBy = map (name: "podman-${podName}-${name}.service") (lib.attrNames options.containers);
+            requiredBy = childContainerServices;
+            before = childContainerServices;
             preStart = ''
               ${podman} pod rm --force ${podName} || true
             '';
