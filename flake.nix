@@ -12,13 +12,6 @@
         nixpkgs.follows = "nixpkgs";
       };
     };
-    blocklistdownloadthing = {
-      url = "github:foldu/blocklistdownloadthing";
-      inputs = {
-        crane.follows = "crane";
-        nixpkgs.follows = "nixpkgs";
-      };
-    };
   };
 
   outputs =
@@ -26,7 +19,6 @@
       nixpkgs,
       flake-utils,
       eunzip,
-      blocklistdownloadthing,
       ...
     }:
     {
@@ -44,7 +36,6 @@
         };
         myPackages = nixpkgs.lib.foldl (acc: x: acc // x.packages.${system}) { } [
           eunzip
-          blocklistdownloadthing
         ];
       in
       {
