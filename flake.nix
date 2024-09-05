@@ -21,20 +21,34 @@
     };
   };
 
-  outputs = { nixpkgs, flake-utils, eunzip, blocklistdownloadthing, ... }: {
-    nixosModules = {
-      podman-pods = import ./modules/podman-pods.nix;
-    };
-  } // (flake-utils.lib.eachDefaultSystem (system:
-    let
-      pkgs = nixpkgs.legacyPackages.${system};
-      nuScript = import ./packages/nu-script.nix { inherit pkgs; lib = nixpkgs.lib; };
-      myPackages = nixpkgs.lib.foldl (acc: x: acc // x.packages.${system}) { } [
-        eunzip
-        blocklistdownloadthing
-      ];
-    in
+  outputs =
     {
-      packages = { } // myPackages // nuScript;
-    }));
+      nixpkgs,
+      flake-utils,
+      eunzip,
+      blocklistdownloadthing,
+      ...
+    }:
+    {
+      nixosModules = {
+        podman-pods = import ./modules/podman-pods.nix;
+      };
+    }
+    // (flake-utils.lib.eachDefaultSystem (
+      system:
+      let
+        pkgs = nixpkgs.legacyPackages.${system};
+        nuScript = import ./packages/nu-script.nix {
+          inherit pkgs;
+          lib = nixpkgs.lib;
+        };
+        myPackages = nixpkgs.lib.foldl (acc: x: acc // x.packages.${system}) { } [
+          eunzip
+          blocklistdownloadthing
+        ];
+      in
+      {
+        packages = { } // myPackages // nuScript;
+      }
+    ));
 }
